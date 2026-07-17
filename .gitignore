@@ -1,0 +1,14 @@
+# macOS
+.DS_Store
+
+# Node Modules
+**/node_modules/
+
+# Environment Files
+**/.env
+
+# Uploaded PDFs
+**/uploads/
+
+# Logs
+*.log
