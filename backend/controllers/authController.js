@@ -1,5 +1,6 @@
 const adminModel = require("../models/adminModel");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 const adminLogin = (req, res) => {
 
@@ -35,9 +36,22 @@ const adminLogin = (req, res) => {
                 });
             }
 
+            // Generate JWT Token
+            const token = jwt.sign(
+                {
+                    id: admin.id,
+                    email: admin.email
+                },
+                process.env.JWT_SECRET,
+                {
+                    expiresIn: "1h"
+                }
+            );
+
             return res.status(200).json({
                 success: true,
-                message: "Login Successful"
+                message: "Login Successful",
+                token: token
             });
 
         });
