@@ -19,4 +19,22 @@ router.get(
     studentController.getAllStudents
 );
 
+router.get(
+    "/students/:id",
+    verifyToken,
+    studentController.getStudentById
+);
+
+router.put(
+    "/students/:id",
+    verifyToken,
+    studentController.updateStudent
+);
+
+router.delete(
+    "/students/:id",
+    verifyToken,
+    studentController.deleteStudent
+);
+
 module.exports = router;

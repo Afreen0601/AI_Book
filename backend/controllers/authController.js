@@ -44,7 +44,7 @@ const adminLogin = (req, res) => {
                 },
                 process.env.JWT_SECRET,
                 {
-                    expiresIn: "1h"
+                    expiresIn: "8h"
                 }
             );
 
@@ -57,6 +57,8 @@ const adminLogin = (req, res) => {
         });
 
     });
+
+    
 
 };
 
