@@ -29,7 +29,33 @@ const getAllNotes = (callback) => {
     db.query(sql, callback);
 };
 
+// Get Note By ID
+const getNoteById = (id, callback) => {
+
+    const sql = `
+        SELECT *
+        FROM notes
+        WHERE id = ?
+    `;
+
+    db.query(sql, [id], callback);
+};
+
+
+// Delete Note
+const deleteNote = (id, callback) => {
+
+    const sql = `
+        DELETE FROM notes
+        WHERE id = ?
+    `;
+
+    db.query(sql, [id], callback);
+};
+
 module.exports = {
     uploadNote,
-    getAllNotes
+    getAllNotes,
+    getNoteById,
+    deleteNote
 };

@@ -15,6 +15,7 @@ const noteRoutes = require("./routes/noteRoutes");
 app.use("/api/auth", authRoutes);
 app.use("/api/admin", studentRoutes);
 app.use("/api", noteRoutes);
+app.use("/api/admin", noteRoutes);
 
 
 app.get("/", (req, res) => {

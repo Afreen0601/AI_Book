@@ -1,4 +1,6 @@
 const noteModel = require("../models/noteModel");
+const fs = require("fs");
+const path = require("path");
 
 // Upload Note
 const uploadNote = (req, res) => {
@@ -66,7 +68,59 @@ const getAllNotes = (req, res) => {
     });
 
 };
+const deleteNote = (req, res) => {
+
+    const id = req.params.id;
+
+    noteModel.getNoteById(id, (err, results) => {
+
+        if (err) {
+            return res.status(500).json({
+                message: "Database Error"
+            });
+        }
+
+        if (results.length === 0) {
+            return res.status(404).json({
+                message: "Note Not Found"
+            });
+        }
+
+        const note = results[0];
+
+        const filePath = path.join(__dirname, "..", note.file_path);
+
+        fs.unlink(filePath, (err) => {
+
+            if (err) {
+                return res.status(500).json({
+                    message: "Error deleting PDF file"
+                });
+            }
+        
+            noteModel.deleteNote(id, (err, result) => {
+        
+                if (err) {
+                    return res.status(500).json({
+                        message: "Database Error"
+                    });
+                }
+        
+                return res.status(200).json({
+                    success: true,
+                    message: "Note Deleted Successfully"
+                });
+        
+            });
+        
+        });
+
+
+    });
+
+};
 module.exports = {
     uploadNote,
-    getAllNotes
+    getAllNotes,
+    deleteNote
 };

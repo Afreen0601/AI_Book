@@ -16,5 +16,12 @@ router.get(
     "/student/notes",
     noteController.getAllNotes
 );
+// Delete Note
+router.delete(
+    "/notes/:id",
+    verifyToken,
+    noteController.deleteNote
+);
+
 
 module.exports = router;
